@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <iostream>
 
 struct vertix
 {
@@ -19,11 +20,12 @@ struct face
     vertix vertix[3];
 };
 
-inline p_vec3 parseLine(std::string line)
+p_vec3 parseLine(std::string line)
 {
     std::string currentFloat = "";
     float x=0,y=0,z=0;
-    for(int i = 1; i<line.size(); i++) 
+    //std::cout << line << std::endl;
+    for(int i = 2; i<line.size(); i++) 
     {
         if(line[i]==' '||i==line.size()-1) 
         {
@@ -31,6 +33,7 @@ inline p_vec3 parseLine(std::string line)
                 currentFloat+=line[i];
             if(currentFloat.size()) 
             {
+                //std::cout << currentFloat << std::endl;
                 if(!x)
                     x = std::stof(currentFloat);
                 else if(!y)
@@ -38,9 +41,10 @@ inline p_vec3 parseLine(std::string line)
                 else
                     z = std::stof(currentFloat);
                 currentFloat="";
-                continue;
             }
+            continue;
         }
+
         currentFloat+=line[i];
     }
     return {x,y,z};
@@ -67,6 +71,21 @@ void getVertices(std::string objPath, face* vertices)
         if(line[0]=='v'&&line[1]=='n')
             vecNormals.push_back(parseLine(line));
     }
+    std::cout << "v: " << std::endl;
+    for(int i = 0; i < vecPositions.size(); i++)
+        std::cout << vecPositions[i].x << " " << vecPositions[i].y << " " << vecPositions[i].z << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "vt: " << std::endl;
+    for(int i = 0; i < vecTextures.size(); i++)
+        std::cout << vecTextures[i].x << " " << vecTextures[i].y << " " << vecTextures[i].z << std::endl;
+    std::cout << std::endl;
+    std::cout << "vn: " << std::endl;
+    for(int i = 0; i < vecNormals.size(); i++)
+        std::cout << vecNormals[i].x << " " << vecNormals[i].y << " " << vecNormals[i].z << std::endl;
+    std::cout << std::endl;
+
+    
 }
 
 #endif

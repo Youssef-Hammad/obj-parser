@@ -5,8 +5,9 @@ using namespace std;
 
 int main()
 {
-    ifstream objfile;
+    string path = "testing.obj";
+    face* vertices;
+    getVertices(path,vertices);
     
-
     return 0;
 }

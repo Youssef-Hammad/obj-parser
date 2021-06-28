@@ -14,6 +14,7 @@ struct p_vec3
     }
 };
 
+// Represents vertex data
 struct p_vertex
 {
     p_vec3 vecPos;
@@ -21,6 +22,7 @@ struct p_vertex
     p_vec3 vecNormal;
 };
 
+// Represents face data (vertex[0], vertex[1], vertex[2])
 struct p_face
 {
     p_vertex vertex[3];

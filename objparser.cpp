@@ -92,34 +92,35 @@ void getVertices(std::string objPath, std::vector<p_face> &vertices)
         for(int j = 0; j < faceValues.size(); j++)
         {
             std::vector<std::string> vertexData = split(faceValues[j],'/');
-            while(vertexData.size()<3) {
+            while(vertexData.size()<3) 
+            {
                 vertexData.push_back("0");
             }
             tempVertices.push_back({vecPositions[std::stoi(vertexData[0])],vecTextures[std::stoi(vertexData[1])],vecNormals[std::stoi(vertexData[2])]});
         }
+        p_face parsedFace;
         // handling if the face contains 4 vertices
-        if(tempVertices.size()==4) {
-            p_face tempFace;
-            tempFace.vertex[0]=tempVertices[0];
-            tempFace.vertex[1]=tempVertices[1];
-            tempFace.vertex[2]=tempVertices[2];
+        if(tempVertices.size()==4) 
+        {
+            parsedFace.vertex[0]=tempVertices[0];
+            parsedFace.vertex[1]=tempVertices[1];
+            parsedFace.vertex[2]=tempVertices[2];
             
-            vertices.push_back(tempFace);
+            vertices.push_back(parsedFace);
             
-            tempFace.vertex[0]=tempVertices[0];
-            tempFace.vertex[1]=tempVertices[3];
-            tempFace.vertex[2]=tempVertices[2];
+            parsedFace.vertex[0]=tempVertices[0];
+            parsedFace.vertex[1]=tempVertices[3];
+            parsedFace.vertex[2]=tempVertices[2];
 
-            vertices.push_back(tempFace);
+            vertices.push_back(parsedFace);
         }
         else if(tempVertices.size()==3)
         {
-            p_face tempFace;
-            tempFace.vertex[0]=tempVertices[0];
-            tempFace.vertex[1]=tempVertices[1];
-            tempFace.vertex[2]=tempVertices[2];
+            parsedFace.vertex[0]=tempVertices[0];
+            parsedFace.vertex[1]=tempVertices[1];
+            parsedFace.vertex[2]=tempVertices[2];
             
-            vertices.push_back(tempFace);
+            vertices.push_back(parsedFace);
         }
     }
     objFile.close();

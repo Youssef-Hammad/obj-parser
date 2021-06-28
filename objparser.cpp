@@ -59,15 +59,18 @@ std::vector<std::string> parseFace(std::string line)
 void getVertices(std::string objPath, std::vector<p_face> &vertices)
 {
     std::vector<p_vec3> vecPositions;
+    vecPositions.push_back({0,0,0});
     std::vector<p_vec3> vecTextures;
+    vecTextures.push_back({0,0,0});
     std::vector<p_vec3> vecNormals;
+    vecNormals.push_back({0,0,0});
     std::vector<std::string> unparsedFaces;
     std::ifstream objFile;
     objFile.open(objPath.c_str());
     std::string line;
     while(std::getline(objFile,line)) 
     {
-        //std::cout << "iteration" << std::endl;
+//         //std::cout << "iteration" << std::endl;
 //___________________PARSING V POSITIONS_____________________
         if(line[0]=='v'&&line[1]==' ')
             vecPositions.push_back(parseLine(line));
@@ -88,11 +91,13 @@ void getVertices(std::string objPath, std::vector<p_face> &vertices)
         std::vector<p_vertex> tempVertices;
         for(int j = 0; j < faceValues.size(); j++)
         {
-            std::vector<std::string> vertexData = split(faceValues[i],'/');
-
+            std::vector<std::string> vertexData = split(faceValues[j],'/');
+            while(vertexData.size()<3) {
+                vertexData.push_back("0");
+            }
             tempVertices.push_back({vecPositions[std::stoi(vertexData[0])],vecTextures[std::stoi(vertexData[1])],vecNormals[std::stoi(vertexData[2])]});
         }
-        // handling if the face contains 4 vertic
+        // handling if the face contains 4 vertices
         if(tempVertices.size()==4) {
             p_face tempFace;
             tempFace.vertex[0]=tempVertices[0];
@@ -117,6 +122,7 @@ void getVertices(std::string objPath, std::vector<p_face> &vertices)
             vertices.push_back(tempFace);
         }
     }
+    objFile.close();
     //std::cout << vecPositions.size() << " " << vecTextures.size() << " " << vecNormals.size() << " " << unparsedFaces.size() << std::endl;
     // std::cout << "v: " << std::endl;
     // for(int i = 0; i < vecPositions.size(); i++)

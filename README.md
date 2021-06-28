@@ -13,7 +13,7 @@ First make sure you include the library, after that:
 Note: make sure to replace each `\` with `\\` in the path to avoid any bugs
 ```cpp
 vector<p_face> vec;
-string path = "C:\\path\\model.obj"
+string path = "C:\\path\\model.obj";
 ```
 After you're done, call `getVertices` and pass the variables we just created
 ```cpp

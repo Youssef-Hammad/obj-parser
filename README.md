@@ -10,6 +10,7 @@ C++ library that parses `.obj` files into a more usable format
 First make sure you include the library, after that:
 - Create a STL `vector` of type `p_face`
 - Add the path to the `.obj` you wish to parse as a `string`
+
 Note: make sure to replace each `\` with `\\` in the path to avoid any bugs
 ```cpp
 vector<p_face> vec;
